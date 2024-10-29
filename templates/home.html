@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 250vh;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex; 
+            flex-wrap: wrap;
+        }
+
+        label {
+            width: 100%;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Customer Churn Prediction</h1>
+    <form method="POST">
+        <!-- Simplified input fields using dropdowns -->
+        <label for="query1">Senior Citizen (0 for No, 1 for Yes):</label>
+        <select id="query1" name="query1" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <label for="query2">Monthly Charges:</label>
+        <input type="number" id="query2" name="query2" step="0.01" required>
+
+        <label for="query3">Total Charges:</label>
+        <input type="number" id="query3" name="query3" step="0.01" required>
+
+        <label for="query4">Gender:</label>
+        <select id="query4" name="query4" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label for="query5">Partner:</label>
+        <select id="query5" name="query5" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query6">Dependents:</label>
+        <select id="query6" name="query6" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query7">Phone Service:</label>
+        <select id="query7" name="query7" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query8">Multiple Lines:</label>
+        <select id="query8" name="query8" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query9">Internet Service:</label>
+        <select id="query9" name="query9" required>
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber optic</option>
+            <option value="None">None</option>
+        </select>
+
+        <label for="query10">Online Security:</label>
+        <select id="query10" name="query10" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query11">Online Backup:</label>
+        <select id="query11" name="query11" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query12">Device Protection:</label>
+        <select id="query12" name="query12" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query13">Tech Support:</label>
+        <select id="query13" name="query13" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query14">Streaming TV:</label>
+        <select id="query14" name="query14" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query15">Streaming Movies:</label>
+        <select id="query15" name="query15" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query16">Contract:</label>
+        <select id="query16" name="query16" required>
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+        </select>
+
+        <label for="query17">Paperless Billing:</label>
+        <select id="query17" name="query17" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label for="query18">Payment Method:</label>
+        <select id="query18" name="query18" required>
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer">Bank transfer</option>
+            <option value="Credit card">Credit card</option>
+        </select>
+
+        <label for="query19">Tenure (number of months):</label>
+        <input type="number" id="query19" name="query19" required>
+
+        <button type="submit" class="button">Predict</button>
+    </form>
+
+    <div class="result">
+        {% if output1 %}
+        <p>{{ output1 }}</p>
+        <p>{{ output2 }}</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
